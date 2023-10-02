@@ -1,0 +1,40 @@
+/* userChatRooms.scss */
+.user-chat-rooms {
+  background-color: #f4f4f4;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 16px;
+  margin: 0 auto;
+  position: absolute;
+  top: 250px;
+  right: 200px;
+  width: 300px;
+}
+.user-chat-rooms h2 {
+  font-size: 18px;
+  margin-bottom: 12px;
+}
+.user-chat-rooms ul {
+  list-style-type: none;
+  padding: 0;
+}
+.user-chat-rooms ul li {
+  margin-bottom: 8px;
+}
+.user-chat-rooms ul li button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 8px 16px;
+  cursor: pointer;
+  width: 100%;
+  text-align: left;
+  transition: background-color 0.2s;
+}
+.user-chat-rooms ul li button:hover {
+  background-color: #0056b3;
+}
+.user-chat-rooms ul li button.active {
+  background-color: #0056b3;
+}/*# sourceMappingURL=userChatRooms.css.map */

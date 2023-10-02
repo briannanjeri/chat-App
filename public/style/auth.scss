@@ -1,0 +1,70 @@
+@import "../variables/_variables";
+@import "../mixin/mixin";
+
+.auth-container {
+  background-color: lightgrey;
+  width: 100%;
+  height: 100vh;
+}
+
+.header {
+  background-color: $header-bgcolor;
+  color: white;
+  padding: 20px 0;
+}
+
+.secondary-nav {
+  ul {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 0;
+    margin: 0;
+  }
+  .header-title a{
+    color: #000000;
+    font-size: 24px
+  }
+  .header-login {
+    @include header-login-button;
+  }
+  .header-login a {
+    color: white;
+  }
+  li a {
+    text-decoration: none;
+  }
+}
+
+.input-container {
+  margin-top: 130px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+
+    h2 {
+      text-align: center;
+        margin-right: 345px;
+      }
+  input {
+    padding: $input-padding;
+    border: $input-border;
+    border-radius: $input-border-radius;
+    margin: auto;
+    width: 400px;
+    margin-bottom: 10px;
+  }
+  button {
+    @include signup-button;
+  }
+  .switch-button {
+    background-color: dimgray;
+    margin-top: 5px;
+
+    &:hover{
+          background-color: darkslategray;
+    }
+  }
+}
