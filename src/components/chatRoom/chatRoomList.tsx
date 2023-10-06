@@ -42,25 +42,24 @@ const ChatRoomList = ({ user, setUser }: userProps) => {
       <ChatRoomCreation chatRoom={chatRoom} setChatRoom={setChatRoom} />
       <h2>Chat Rooms</h2>
       {chatRoom.map((room) => (
-        <div key={room.id}>
-          <RoomSelection
-            Room={room}
-            selectedRoom={selectedRoom}
-            setSelectedRoom={setSelectedRoom}
-            setUser={setUser}
-            user={user}
-          />
-        </div>
+        <RoomSelection
+          Room={room}
+          selectedRoom={selectedRoom}
+          setSelectedRoom={setSelectedRoom}
+          setUser={setUser}
+          user={user}
+        />
       ))}
-      <UserChatRooms
-        selectedRoom={selectedRoom}
-        setSelectedRoom={setSelectedRoom}
-        user={user}
-      />
       <ChatMessages
         selectedRoom={selectedRoom}
         user={user}
         setSelectedRoom={setSelectedRoom}
+      />
+
+      <UserChatRooms
+        selectedRoom={selectedRoom}
+        setSelectedRoom={setSelectedRoom}
+        user={user}
       />
     </div>
   );
