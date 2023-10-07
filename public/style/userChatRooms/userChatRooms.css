@@ -4,11 +4,7 @@
   border: 1px solid #ccc;
   border-radius: 4px;
   padding: 16px;
-  margin: 0 auto;
-  position: absolute;
-  top: 250px;
-  right: 200px;
-  width: 300px;
+  max-width: 300px;
 }
 .user-chat-rooms h2 {
   font-size: 18px;

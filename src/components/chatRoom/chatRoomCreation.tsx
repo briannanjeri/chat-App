@@ -1,9 +1,10 @@
 "use client";
 import React from "react";
 import { useState, useEffect } from "react";
-import { db } from "../lib/Firebase/firebase";
+import { db, app } from "../lib/Firebase/firebase";
 import { collection, query, where, getDocs, addDoc } from "firebase/firestore";
 import { ChatRoomProps } from "../types/type";
+import { getAuth } from "firebase/auth";
 
 import "./../../../public/style/chatroom/ChatRoomCreation.css";
 
@@ -12,13 +13,21 @@ import ChatRoomList from "./chatRoomList";
 const ChatRoomCreation = ({ chatRoom, setChatRoom }: ChatRoomProps) => {
   const [roomName, setRoomName] = useState("");
 
+  const auth = getAuth(app);
+
   console.log("roomname", roomName);
 
   const handleCreateRoom = async () => {
     try {
+      const currentUser = auth.currentUser;
+      if (!currentUser) {
+        console.log("User not authenticated.");
+        return;
+      }
       if (roomName.trim() !== "") {
         //check if the roomName exists in the chatRooms collection
         const chatRoomsRef = collection(db, "chatRooms");
+        console.log("chatroomsRef", chatRoomsRef);
         const querySnapshot = await getDocs(
           query(chatRoomsRef, where("name", "==", roomName))
         );
@@ -28,12 +37,15 @@ const ChatRoomCreation = ({ chatRoom, setChatRoom }: ChatRoomProps) => {
           const newChatRoom = {
             name: roomName,
             members: [], // Initially empty member list
+            creatorUid: currentUser.uid,
           };
 
-          await addDoc(chatRoomsRef, newChatRoom);
+          const docRef = await addDoc(chatRoomsRef, newChatRoom);
+          console.log("docref", docRef);
+
           console.log("Chat room added with ID: ", chatRoomsRef.id);
           if (setChatRoom) {
-            setChatRoom([...chatRoom, newChatRoom]);
+            setChatRoom([...chatRoom, { ...newChatRoom, id: docRef.id }]);
             setRoomName("");
           }
         }

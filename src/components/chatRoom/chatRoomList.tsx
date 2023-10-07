@@ -14,6 +14,8 @@ import Signout from "../authForm/signout";
 const ChatRoomList = ({ user, setUser }: userProps) => {
   const [chatRoom, setChatRoom] = useState<RoomData[]>([]);
   const [selectedRoom, setSelectedRoom] = useState<RoomData | null>(null);
+  const [userChatRooms, setUserChatRooms] = useState<RoomData[]>([]);
+
   // const [user, setUser] = useState<User | null>(null);
   console.log("ouruser", user);
   console.log("selectedRoom", selectedRoom);
@@ -42,24 +44,29 @@ const ChatRoomList = ({ user, setUser }: userProps) => {
       <ChatRoomCreation chatRoom={chatRoom} setChatRoom={setChatRoom} />
       <h2>Chat Rooms</h2>
       {chatRoom.map((room) => (
-        <RoomSelection
-          Room={room}
-          selectedRoom={selectedRoom}
-          setSelectedRoom={setSelectedRoom}
-          setUser={setUser}
-          user={user}
-        />
+        <div key={room.id}>
+          <RoomSelection
+            Room={room}
+            selectedRoom={selectedRoom}
+            setSelectedRoom={setSelectedRoom}
+            setUser={setUser}
+            user={user}
+            setChatRoom={setChatRoom}
+            setUserChatRooms={setUserChatRooms}
+          />
+        </div>
       ))}
-      <ChatMessages
-        selectedRoom={selectedRoom}
-        user={user}
-        setSelectedRoom={setSelectedRoom}
-      />
-
       <UserChatRooms
         selectedRoom={selectedRoom}
         setSelectedRoom={setSelectedRoom}
         user={user}
+        userChatRooms={userChatRooms}
+        setUserChatRooms={setUserChatRooms}
+      />
+      <ChatMessages
+        selectedRoom={selectedRoom}
+        user={user}
+        setSelectedRoom={setSelectedRoom}
       />
     </div>
   );

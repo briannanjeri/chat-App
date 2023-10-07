@@ -5,6 +5,7 @@ import {
   Query,
   arrayUnion,
   collection,
+  deleteDoc,
   doc,
   getDoc,
   updateDoc,
@@ -23,6 +24,8 @@ type RoomProps = {
   selectedRoom: RoomData | null;
   setSelectedRoom: React.Dispatch<React.SetStateAction<RoomData | null>>;
   Room: RoomData;
+  setChatRoom: React.Dispatch<React.SetStateAction<RoomData[]>>;
+  setUserChatRooms: React.Dispatch<React.SetStateAction<RoomData[]>>;
 };
 
 const RoomSelection = ({
@@ -31,9 +34,11 @@ const RoomSelection = ({
   selectedRoom,
   setSelectedRoom,
   setUser,
+  setChatRoom,
+  setUserChatRooms,
 }: RoomProps) => {
   const [isMember, setIsMember] = useState<boolean>(false);
-
+  console.log("Room", Room);
   // const auth = getAuth(app);
   // const [user, loading] = useAuthState(auth);
   // console.log("user", user);
@@ -65,6 +70,8 @@ const RoomSelection = ({
     checkMembership();
   }, [Room.id]);
 
+  const isCreator = user && Room.creatorUid == user.uid;
+
   const joinChatRoom = async (Room: RoomData) => {
     try {
       if (!user) {
@@ -92,6 +99,7 @@ const RoomSelection = ({
       const updatedMembers = arrayUnion(user.uid);
       await updateDoc(chatRoomRef, { members: updatedMembers });
       alert("successfully joined the chatRoom");
+      setUserChatRooms((prevChatRooms) => [...prevChatRooms, Room]);
       setIsMember(true);
     } catch (error) {
       if (error instanceof Error) {
@@ -106,6 +114,7 @@ const RoomSelection = ({
       if (user && Room.id) {
         const chatRoomRef = doc(db, "chatRooms", Room.id);
         const chatRoomDoc = await getDoc(chatRoomRef);
+        console.log("leavechatroomdoc", chatRoomDoc);
 
         if (!chatRoomDoc.exists()) {
           console.log("Chat room does not exist.");
@@ -129,6 +138,45 @@ const RoomSelection = ({
     setSelectedRoom(null);
     localStorage.removeItem("selectedRoom");
   };
+
+  const deleteChatRoom = async (Room: RoomData) => {
+    try {
+      if (!Room) {
+        console.log("Room does not exist");
+        return;
+      }
+      if (user && Room.id) {
+        //fetch the chatroom
+        const chatRoomRef = doc(db, "chatRooms", Room.id);
+        const chatRoomDoc = await getDoc(chatRoomRef);
+        console.log("chatRoomDoc", chatRoomDoc);
+        if (!chatRoomDoc) {
+          console.log("selected room does not exiist");
+          return;
+        }
+        //check if user is the creator of the chatroom
+        const creatorUid = chatRoomDoc.data()?.creatorUid;
+        console.log("creatorUid", creatorUid);
+        if (creatorUid == user.uid) {
+          //user is the creator allow deletion
+          await deleteDoc(chatRoomRef);
+          setChatRoom((prevChatRooms) =>
+            prevChatRooms.filter((room) => room.id != Room.id)
+          );
+          setSelectedRoom(null);
+          console.log("selectedrroooom", selectedRoom);
+          localStorage.removeItem("selectedRoom");
+        } else {
+          console.log(
+            "You are not the creator of this chat room. Deletion not allowed."
+          );
+        }
+      }
+    } catch (error) {
+      console.log("Error deleting the chatroom", error);
+    }
+  };
+
   return (
     <div className="chat-room-item">
       <span className="room-name">{Room.name}</span>
@@ -137,9 +185,19 @@ const RoomSelection = ({
           Join
         </button>
       ) : (
-        <button className="leave-button" onClick={() => leaveChatRoom(Room)}>
-          Leave
-        </button>
+        <div>
+          <button className="leave-button" onClick={() => leaveChatRoom(Room)}>
+            Leave
+          </button>
+          {isCreator && (
+            <button
+              className="delete-button"
+              onClick={() => deleteChatRoom(Room)}
+            >
+              Delete
+            </button>
+          )}
+        </div>
       )}
     </div>
   );

@@ -3,6 +3,7 @@ export interface RoomData {
   id?: string;
   name: string;
   members: string[];
+  creatorUid: string;
 }
 
 export interface ChatRoomProps {
@@ -20,7 +21,7 @@ export interface messageDataProps {
 export type ChatMessagesProps = {
   id?: string;
   selectedRoom: RoomData | null;
-  setSelectedRoom: (message: RoomData) => void;
+  setSelectedRoom: (message: RoomData | null) => void;
   user?: User | null | undefined;
 };
 

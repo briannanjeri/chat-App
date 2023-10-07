@@ -6,6 +6,8 @@ import { RoomData } from "../types/type";
 import "./../../../public/style/userChatRooms/userChatRooms.css";
 
 type UserChatRoomsProps = {
+  userChatRooms: RoomData[];
+  setUserChatRooms: React.Dispatch<React.SetStateAction<RoomData[]>>;
   user: User | null;
   selectedRoom: RoomData | null;
   setSelectedRoom: React.Dispatch<React.SetStateAction<RoomData | null>>;
@@ -15,8 +17,9 @@ const UserChatRooms = ({
   user,
   selectedRoom,
   setSelectedRoom,
+  userChatRooms,
+  setUserChatRooms,
 }: UserChatRoomsProps) => {
-  const [userChatRooms, setUserChatRooms] = useState<RoomData[]>([]);
   console.log("userChatRooms", userChatRooms);
   useEffect(() => {
     if (!user) {
