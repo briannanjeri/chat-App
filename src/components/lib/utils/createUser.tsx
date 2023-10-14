@@ -21,6 +21,7 @@ interface Props {
   setEmailError: (errorMessage: string) => void;
   setPasswordError: (errorMessage: string) => void;
   setUsernameError: (errorMessage: string) => void;
+  onFormSwitch: (formName: string) => void;
 }
 
 export const createUser = async ({
@@ -30,6 +31,7 @@ export const createUser = async ({
   setUsernameError,
   setEmailError,
   setPasswordError,
+  onFormSwitch,
 }: Props) => {
   try {
     const isUsernameValid = validateUsername(username, setUsernameError);
@@ -80,6 +82,7 @@ export const createUser = async ({
 
           console.log("User added to Firestore with ID: ", userDocRef.id);
           alert("Account created and email already verified.");
+          onFormSwitch("login");
         }
       } catch (error) {
         if (error instanceof Error) {

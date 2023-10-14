@@ -43,7 +43,7 @@ const ChatRoomCreation = ({ chatRoom, setChatRoom }: ChatRoomProps) => {
           const docRef = await addDoc(chatRoomsRef, newChatRoom);
           console.log("docref", docRef);
 
-          console.log("Chat room added with ID: ", chatRoomsRef.id);
+          console.log("Chat room added with ID: ", docRef.id);
           if (setChatRoom) {
             setChatRoom([...chatRoom, { ...newChatRoom, id: docRef.id }]);
             setRoomName("");

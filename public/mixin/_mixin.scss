@@ -25,3 +25,13 @@
     text-align: center;
 }
 
+
+@mixin customButton {
+     color: #fff;
+     border: none;
+     cursor: pointer;
+     padding: 10px 15px;
+        border-radius: 10px;
+        font-size: 15px;
+     
+ }

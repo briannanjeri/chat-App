@@ -16,7 +16,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { app } from "../lib/Firebase/firebase";
 import { User, getAuth } from "firebase/auth";
 import { useState, useEffect } from "react";
-import "./../../../public/style/chatList/chatList.css";
+import "./../../../public/style/chatList/chatList.scss";
 
 type RoomProps = {
   user: User | null;

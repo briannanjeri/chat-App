@@ -7,9 +7,12 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { useState, useEffect } from "react";
 import { User } from "firebase/auth";
 import { app } from "../lib/Firebase/firebase";
+import { useRouter } from "next/navigation";
 
 const Index = () => {
   const [user, setUser] = useState<User | null>(null);
+
+  const router = useRouter();
 
   const auth = getAuth(app);
   const [signedInUser, loading] = useAuthState(auth);
@@ -20,16 +23,15 @@ const Index = () => {
       setUser(signedInUser);
 
       // Set the user state only once when the user is loaded or signed in
+    } else {
+      router.push("/auth");
     }
-  }, [user]);
+  }, [user, router]);
 
   console.log("signedinuser", user);
 
   return (
-    <div>
-      {/* <ChatRoomCreation /> */}
-      <ChatRoomList user={user} setUser={setUser} />
-    </div>
+    <div>{signedInUser && <ChatRoomList user={user} setUser={setUser} />}</div>
   );
 };
 

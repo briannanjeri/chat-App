@@ -61,6 +61,7 @@ const Signup = ({ onFormSwitch }: SignupProps) => {
               setEmailError,
               setPasswordError,
               setUsernameError,
+              onFormSwitch,
             })
           }
         >

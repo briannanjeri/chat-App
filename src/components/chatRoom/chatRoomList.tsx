@@ -39,35 +39,37 @@ const ChatRoomList = ({ user, setUser }: userProps) => {
   }, []);
 
   return (
-    <div className="list-container">
-      {/* <Signout /> */}
-      <ChatRoomCreation chatRoom={chatRoom} setChatRoom={setChatRoom} />
-      <h2>Chat Rooms</h2>
-      {chatRoom.map((room) => (
-        <div key={room.id}>
-          <RoomSelection
-            Room={room}
-            selectedRoom={selectedRoom}
-            setSelectedRoom={setSelectedRoom}
-            setUser={setUser}
-            user={user}
-            setChatRoom={setChatRoom}
-            setUserChatRooms={setUserChatRooms}
-          />
-        </div>
-      ))}
-      <UserChatRooms
-        selectedRoom={selectedRoom}
-        setSelectedRoom={setSelectedRoom}
-        user={user}
-        userChatRooms={userChatRooms}
-        setUserChatRooms={setUserChatRooms}
-      />
-      <ChatMessages
-        selectedRoom={selectedRoom}
-        user={user}
-        setSelectedRoom={setSelectedRoom}
-      />
+    <div>
+      <Signout />
+      <div className="list-container">
+        <ChatRoomCreation chatRoom={chatRoom} setChatRoom={setChatRoom} />
+        <h2>Available Chat Rooms</h2>
+        {chatRoom.map((room) => (
+          <div key={room.id}>
+            <RoomSelection
+              Room={room}
+              selectedRoom={selectedRoom}
+              setSelectedRoom={setSelectedRoom}
+              setUser={setUser}
+              user={user}
+              setChatRoom={setChatRoom}
+              setUserChatRooms={setUserChatRooms}
+            />
+          </div>
+        ))}
+        <UserChatRooms
+          selectedRoom={selectedRoom}
+          setSelectedRoom={setSelectedRoom}
+          user={user}
+          userChatRooms={userChatRooms}
+          setUserChatRooms={setUserChatRooms}
+        />
+        <ChatMessages
+          selectedRoom={selectedRoom}
+          user={user}
+          setSelectedRoom={setSelectedRoom}
+        />
+      </div>
     </div>
   );
 };

@@ -1,6 +1,10 @@
+@import "../../variables/_variables";
+@import "../../mixin/mixin";
+
 .list-container {
     background-color: #f0f0f0;
     padding: 20px;
+    width: 100%;
 }
 
 .chat-room-item {
@@ -19,16 +23,65 @@ width: 400px;
   }
 
    .join-button {
-       background-color: #007bff;
-       color: #fff;
-       border: none;
-       padding: 5px 10px;
-       cursor: pointer;
+    background-color: $joinButton-bgcolor;
+      @include customButton ;
+
+     &:hover {
+            background-color: #0056b3;
+        }
+   }
+
+
+   .delete-button {
+       background-color: $deleteButton-bgcolor;
+       @include customButton;
 
        &:hover {
-           background-color: #0056b3;
+           background-color: rgb(245, 12, 12);
        }
    }
+
+   .leave-button {
+       background-color: #800080;
+       @include customButton;
+
+       &:hover {
+           background-color: #6A0DAD;
+       }
+   }
+
+.navbar{
+display: flex;
+    justify-content: space-around;
+    width: 100%;
+    margin-bottom: 50px;
+    height: 10px;
+    align-items: center;
+    margin-top: 40px;
+
+    h2 {
+            color: #6A0DAD;
+            font-size: 27px;
+        }
+
+    a {
+            text-decoration: none;
+            color: white;
+            text-align: center;
+        }
+}
+
+.signout-button {
+    background-color: gray;
+     width: 80px;
+    @include customButton;
+
+     a{
+        text-decoration: none;
+        color: white;
+        text-align: center;
+    }
+}
 
          .room-name {
              font-weight: bold;

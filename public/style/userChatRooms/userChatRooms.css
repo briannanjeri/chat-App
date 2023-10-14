@@ -1,10 +1,14 @@
 /* userChatRooms.scss */
 .user-chat-rooms {
-  background-color: #f4f4f4;
+  background-color: #D3D3D3;
   border: 1px solid #ccc;
   border-radius: 4px;
   padding: 16px;
-  max-width: 300px;
+  margin: 0 auto;
+  position: absolute;
+  top: 350px;
+  right: 200px;
+  width: 300px;
 }
 .user-chat-rooms h2 {
   font-size: 18px;
@@ -18,7 +22,7 @@
   margin-bottom: 8px;
 }
 .user-chat-rooms ul li button {
-  background-color: #007bff;
+  background-color: #023602;
   color: #fff;
   border: none;
   border-radius: 4px;
@@ -29,8 +33,8 @@
   transition: background-color 0.2s;
 }
 .user-chat-rooms ul li button:hover {
-  background-color: #0056b3;
+  background-color: #20f120;
 }
 .user-chat-rooms ul li button.active {
-  background-color: #0056b3;
+  background-color: #379137;
 }/*# sourceMappingURL=userChatRooms.css.map */

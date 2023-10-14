@@ -1,6 +1,7 @@
 .list-container {
   background-color: #f0f0f0;
   padding: 20px;
+  width: 100%;
 }
 
 .chat-room-item {
@@ -22,11 +23,74 @@
   background-color: #007bff;
   color: #fff;
   border: none;
-  padding: 5px 10px;
   cursor: pointer;
+  padding: 10px 15px;
+  border-radius: 10px;
+  font-size: 15px;
 }
 .join-button:hover {
   background-color: #0056b3;
+}
+
+.delete-button {
+  background-color: rgba(209, 39, 39, 0.863);
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  padding: 10px 15px;
+  border-radius: 10px;
+  font-size: 15px;
+}
+.delete-button:hover {
+  background-color: rgb(245, 12, 12);
+}
+
+.leave-button {
+  background-color: #800080;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  padding: 10px 15px;
+  border-radius: 10px;
+  font-size: 15px;
+}
+.leave-button:hover {
+  background-color: #6A0DAD;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  margin-bottom: 50px;
+  height: 10px;
+  align-items: center;
+  margin-top: 40px;
+}
+.navbar h2 {
+  color: #6A0DAD;
+  font-size: 27px;
+}
+.navbar a {
+  text-decoration: none;
+  color: white;
+  text-align: center;
+}
+
+.signout-button {
+  background-color: gray;
+  width: 80px;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  padding: 10px 15px;
+  border-radius: 10px;
+  font-size: 15px;
+}
+.signout-button a {
+  text-decoration: none;
+  color: white;
+  text-align: center;
 }
 
 .room-name {
